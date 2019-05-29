@@ -75,6 +75,8 @@ var users = [
 ]
 
 app.get('/', function(req, res){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.render('index',{
         title: 'Rastreio de objetos',
         users: users

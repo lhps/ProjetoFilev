@@ -1,40 +1,28 @@
-<% include partials/header %>
-    <h1> Add customer </h1>
-    <% if(errors) { %>
-        <ul>
-        <% errors.forEach(function(error){ %>
-            <li><%= error.msg %></li>
-        <% }) %>
-        </ul>
-    <% } %>
-    <form method="POST" action="/users/add">
-        <label>First Name</label><br>
-        <input type="text" name="first_name">
-        <br>
-        <label>Last Name</label><br>
-        <input type="text" name="last_name">
-        <br>
-        <label>Email</label><br>
-        <input type="text" name="email">
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
-    <h1> <%= title %></h1> 
-    <ul>
-    <% users.forEach(function(user){ %>
-        <li><%= user.first_name %></li>
-    <% }) %>
-    </ul>  
-    <main role="main" class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-            </p>
-    </main>    
-    
+<html>
+<head>
+          <link href="/projetoFinal/css/cover.css" rel="stylesheet">
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+          <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+          integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+          crossorigin=""></script>
+    </head>
+    <body class="text-center"> 
+      
+    <h1> </h1>
     <div id="mapid" style="width: 600px; height: 400px;">
         <script>
+            var request = new Request('http://localhost:1026/v2/entities?id=location1&options=keyValues', {
+                method: 'GET',
+                headers: {'Access-Control-Allow-Origin': '*'}
+            });
+            fetch(request).then(function(response){
+                return response.text();
+            }).then(function(text){
+                alert(text);
+            });
+
             var mymap = L.map('mapid').setView([51.505, -0.09], 13);
 
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -44,7 +32,11 @@
                     'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 id: 'mapbox.streets'
             }).addTo(mymap);
+
+            L.marker([51.5, -0.09]).addTo(mymap);
+            
         </script>
     </div>
-<% include partials/footer %>
- 
+
+        </body>
+    </html>
